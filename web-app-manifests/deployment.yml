@@ -1,22 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-todo-app
+  name: my-app
+  labels:
+    app: my-app
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
   selector:
     matchLabels:
-      app: node-todo-app
+      app: my-app
   template:
     metadata:
       labels:
-        app: node-todo-app
+        app: my-app
     spec:
       containers:
-        - name: node-todo-app
-          image: mahesh8887/node-todo-app:latest
-          ports:
-            - containerPort: 8000
-          env:
-            - name: PORT
-              value: "8000"
+      - name: my-app
+        image: mahesh8887/project-1:latest        
+        ports:
+        - containerPort: 8080        
+        readinessProbe:
+          httpGet:
+            path: /webapp
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 30
+      terminationGracePeriodSeconds: 30           
