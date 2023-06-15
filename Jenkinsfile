@@ -42,6 +42,7 @@ pipeline {
                     BUILD_NUMBER=${BUILD_NUMBER}
                     sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" web-app-manifests/deployment.yml
                     git add web-app-manifests/deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 
                 '''
              }
