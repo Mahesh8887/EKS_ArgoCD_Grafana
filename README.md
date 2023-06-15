@@ -1,1 +1,1 @@
-# EKS_ArgoCd_Grafana
+# devops_real_time_project
