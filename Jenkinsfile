@@ -40,6 +40,7 @@ pipeline {
                     git config user.email "maheshbiradar88878@gmail.com"
                     git config user.name "mahesh8887"
                     BUILD_NUMBER=${BUILD_NUMBER}
+                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" web-app-manifests/deployment.yml
 
                 '''
              }
